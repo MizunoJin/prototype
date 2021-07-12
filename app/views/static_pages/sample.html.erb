@@ -1,0 +1,31 @@
+<h1>This is the sample page</h1>
+<p>This is sample. This is sample. This is sample. This is sample. This is sample. This is sample. This is sample. </p>
+
+<button>Yes</button>
+<button>No</button>
+
+<Footer>
+  <a href="#">link</a>
+  <a href="#">link</a>
+  <a href="#">link</a>
+</Footer>
+
+<script>
+  document.addEventListener("click", function (e) {
+    const data = {
+      x: e.clientX / window.innerWidth,
+      y: e.clientY / window.innerHeight,
+      url: location.href,
+      width: window.innerWidth
+    };
+    const url = "/save";
+
+    // ajax通信を行いデータを送信する。
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: data,
+      dataType: 'json'
+    })
+  });
+</script>

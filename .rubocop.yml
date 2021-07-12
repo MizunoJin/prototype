@@ -1,0 +1,20 @@
+require:
+  - rubocop-rails
+
+Rails:
+  Enabled: true
+
+AllCops:
+  NewCops: enable
+
+# Allow missing top-level class documentation comment.
+Style/Documentation:
+  Enabled: false
+
+# Allow no more than 200 line.
+Layout/LineLength:
+  Max: 200
+
+# Allow method having many lines.
+Metrics/MethodLength:
+  Enabled: false

@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: password
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: unison_development
+
+test:
+  <<: *default
+  database: unison_test
+
+production:
+  <<: *default
+  database: unison_production
+  username: unison
+  password: <%= ENV['UNISON_DATABASE_PASSWORD'] %>
