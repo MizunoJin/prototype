@@ -13,14 +13,14 @@
 <script>
   document.addEventListener("click", function (e) {
     const data = {
-      x: e.clientX / window.innerWidth,
-      y: e.clientY / window.innerHeight,
+      x: e.clientX,
+      y: e.clientY,
       url: location.href,
       width: window.innerWidth
     };
-    const url = "/save";
 
     // ajax通信を行いデータを送信する。
+    const url = "/save";
     $.ajax({
       url: url,
       type: "POST",

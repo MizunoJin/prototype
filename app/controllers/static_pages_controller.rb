@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def index
-    @coordinate = Coordinate.all
+    gon.coordinates = Coordinate.all
   end
 
   def sample
@@ -13,6 +13,6 @@ class StaticPagesController < ApplicationController
 
   private
   def coordinate_params
-    params.permit(:x, :y, :url)
+    params.permit(:x, :y, :url, :width)
   end
 end

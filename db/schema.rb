@@ -16,9 +16,24 @@ ActiveRecord::Schema.define(version: 2021_07_12_012816) do
   enable_extension "plpgsql"
 
   create_table "coordinates", force: :cascade do |t|
-    t.float "x"
-    t.float "y"
+    t.integer "x"
+    t.integer "y"
+    t.integer "width"
     t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.text "option"
+    t.integer "parent_question_id"
+    t.integer "child_question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.text "question"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

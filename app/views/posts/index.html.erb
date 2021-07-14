@@ -1,0 +1,85 @@
+<div class="container">
+  <h1>ChatBot</h1>
+  <div id="messages">
+    <ul class="list-group my-5" id="chat-list">
+      <li class="border-bottom border-top" id="list-1">
+        <p id=<%="question-#{@question.id}"%>>
+          <%= @question.question %>
+          <span class="text-primary"><%= @question.id %></span>
+        </p>
+        <% @options.each do |option| %>
+          <button class="my-2 option" id=<%="option-#{option.child_question_id}"%>>
+            <%= option.option %>
+            <%= option.id %>
+          </button>
+        <% end %>
+      </li>
+    </ul>
+
+    <h4>質問を追加</h4>
+    <%= form_with url: posts_path do |f| %>
+      <%= f.label :question, "質問" %>
+      <%= f.text_field :question %>
+      <%= f.label :parent_option_id, "親OptionID" %>
+      <%= f.text_field :parent_option_id %>
+      <br>
+      <%= f.label :option1, "オプション1" %>
+      <%= f.text_field :option1 %>
+      <%= f.label :option2, "オプション2" %>
+      <%= f.text_field :option2 %>
+      <br>
+      <%= f.submit %>
+    <% end %>
+
+    <h4 class="border-top my-5">選択肢を追加</h4>
+    <%= form_with url: posts_option_path do |f| %>
+      <%= f.label :option, "オプション" %>
+      <%= f.text_field :option %>
+      <%= f.label :parent_id, "親ID" %>
+      <%= f.text_field :parent_id %>
+      <br>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
+  <script type="text/javascript">
+    $(document).on('click', '.option', function() {
+
+      const url = "posts/reply";
+
+      // ajax返信から得たHTMLでDOM要素を更新する
+      $.ajax({
+        url: url,
+        type: "POST",
+        data: {child_id: $(this).attr('id').replace('option-', '')},
+        dataType: 'json'
+      }).done(function(data){
+        nextData = buildHTML(data);
+        console.log(data);
+        $('#chat-list').append(nextData);
+      });
+
+      function buildHTML(data) {
+        const nextData = `<li class="border-bottom border-top">
+                          <p id="question-${data.nextQuestion.id}">
+                            ${data.nextQuestion.question}
+                            <span class="text-primary">${data.nextQuestion.id}</span>
+                          </p>`
+                          + createOptions(data)
+                          + '</li>'
+
+        function createOptions(data) {
+          let nextOptions = '';
+          for (let option of data.options) {
+            nextOptions += `<button class="my-2 option" id="option-${option.child_question_id}">
+            ${option.option} ${option.id}</button>`
+          }
+          return nextOptions
+        }
+
+        return nextData;
+      }
+
+    });
+  </script>
+</div>
