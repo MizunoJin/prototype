@@ -1,8 +1,8 @@
 <div class="container">
   <h1>ChatBot</h1>
   <div id="messages">
-    <ul class="list-group my-5" id="chat-list">
-      <li class="border-bottom border-top" id="list-1">
+    <ul class="list-group my-5 border border-5 rounded bg-info d-flex flex-column justify-content-end overflow-scroll" id="chat-list">
+      <li class="border border-2 rounded-pill px-5 bg-light my-2">
         <p id=<%="question-#{@question.id}"%>>
           <%= @question.question %>
           <span class="text-primary"><%= @question.id %></span>
@@ -60,7 +60,7 @@
       });
 
       function buildHTML(data) {
-        const nextData = `<li class="border-bottom border-top">
+        const nextData = `<li class="border border-2 rounded-pill px-5 bg-light my-2">
                           <p id="question-${data.nextQuestion.id}">
                             ${data.nextQuestion.question}
                             <span class="text-primary">${data.nextQuestion.id}</span>

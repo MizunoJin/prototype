@@ -22,8 +22,8 @@ class PostsController < ApplicationController
     option.child_question_id = question.id
     option.save
 
-    params[:option1] && option = Option.create!(option: params[:option1], parent_question_id: question.id)
-    params[:option2] && option = Option.create!(option: params[:option2], parent_question_id: question.id)
+    params[:option1].blank? || option = Option.create!(option: params[:option1], parent_question_id: question.id)
+    params[:option2].blank? || option = Option.create!(option: params[:option2], parent_question_id: question.id)
     redirect_to posts_path
   end
 

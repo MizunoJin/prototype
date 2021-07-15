@@ -1,3 +1,14 @@
+/* universal */
+li {
+  list-style: none;
+}
+
+/* chatbot */
+#chat-list {
+  height: 500px;
+}
+
+/* heat map */
 .block {
   stroke: black;
   fill: none;
